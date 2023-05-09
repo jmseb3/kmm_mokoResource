@@ -2,6 +2,7 @@ plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
     id("com.android.library")
+    id("dev.icerock.mobile.multiplatform-resources")
 }
 
 kotlin {
@@ -24,11 +25,18 @@ kotlin {
         podfile = project.file("../iosApp/Podfile")
         framework {
             baseName = "shared"
+            isStatic = true
+            export("dev.icerock.moko:resources:0.22.0")
+            export("dev.icerock.moko:graphics:0.9.0") // toUIColor here
         }
     }
     
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+                api("dev.icerock.moko:resources:0.22.0")
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
@@ -63,4 +71,17 @@ android {
     defaultConfig {
         minSdk = 30
     }
+}
+
+multiplatformResources {
+    // (필수) 반드시 입력
+    multiplatformResourcesPackage = "com.wonddak.mokoresources"
+    // (선택) 기본값 MR
+    multiplatformResourcesClassName = "SharedRes"
+    // (선택) 기본값 Public
+//    multiplatformResourcesVisibility = MRVisibility.Internal
+    // (선택) 기본값 en
+    iosBaseLocalizationRegion = "ko"
+    // (선택) 기본값 "commonMain"
+//    multiplatformResourcesSourceSet = "commonClientMain"
 }
