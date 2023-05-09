@@ -10,6 +10,8 @@ struct ContentView: View {
                 .foregroundColor(ColorsKt.getThemeColor().toColor())
             Text(StringsKt.getUserName(user: nil).localized())
             Text(StringsKt.getUserName(user: User(name: "wonddak", age: 27)).localized())
+            Image(uiImage: ImagesKt.getImage().toUIImage()!)
+            Image(uiImage: ImagesKt.getClose().toUIImage()!)
         }
     }
 }
