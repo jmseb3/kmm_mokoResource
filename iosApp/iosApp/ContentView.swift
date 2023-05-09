@@ -6,6 +6,8 @@ struct ContentView: View {
         VStack {
             Text(StringsKt.getMyDesc().localized())
             Text(StringsKt.getMyFormatDesc(input: "이것은").localized())
+            Text(StringsKt.getUserName(user: nil).localized())
+            Text(StringsKt.getUserName(user: User(name: "wonddak", age: 27)).localized())
         }
 	}
 }
