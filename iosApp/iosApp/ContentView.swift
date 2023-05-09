@@ -2,10 +2,11 @@ import SwiftUI
 import shared
 
 struct ContentView: View {
-	let greet = Greeting().greet()
-
 	var body: some View {
-		Text(greet)
+        VStack {
+            Text(StringsKt.getMyDesc().localized())
+            Text(StringsKt.getMyFormatDesc(input: "이것은").localized())
+        }
 	}
 }
 
